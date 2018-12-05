@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Usama\\AndroidStudioProjects\\HomeAutomation\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Usama\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\4c32dff6278a77031a4018d9cd535901\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Hassaan\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.0.aar\\f00fd547988e250a945332acb41daac4\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Usama\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\f5b208097c18752c2c3846426c4cd948\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Hassaan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.0.aar\\89fd9bc3afe7bebecba84516a778ba91\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
