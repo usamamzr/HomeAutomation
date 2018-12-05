@@ -20,9 +20,9 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.usama.homeautomation.MainActivity" />
+        <activity android:name="com.example.usama.homeautomation.Activities.MainActivity" />
         <activity
-            android:name="com.example.usama.homeautomation.LoginActivity"
+            android:name="com.example.usama.homeautomation.Activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,8 +31,10 @@
             </intent-filter>
             >
         </activity>
-        <activity android:name="com.example.usama.homeautomation.SignUpActivity" />
-        <activity android:name="com.example.usama.homeautomation.FloorsActivity" />
+        <activity android:name="com.example.usama.homeautomation.Activities.SignUpActivity" />
+        <activity android:name="com.example.usama.homeautomation.Activities.FloorsActivity" />
+        <activity android:name="com.example.usama.homeautomation.Activities.RoomsActivity" />
+        <activity android:name="com.example.usama.homeautomation.Activities.ThingsActivity" />
 
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"
