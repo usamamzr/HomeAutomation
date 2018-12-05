@@ -16,7 +16,6 @@ public class FloorsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    String[] myDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +24,18 @@ public class FloorsActivity extends AppCompatActivity {
 
         final ArrayList<Floor> arrayList = new ArrayList<>();
 
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i <= 20; i++) {
             arrayList.add(new Floor("Name: " + i));
         }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.floors_recyclerView);
+        mRecyclerView = findViewById(R.id.floors_recyclerView);
 
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new FloorsRecyclerAdapter(myDataset);
+        mAdapter = new FloorsRecyclerAdapter(arrayList);
         mRecyclerView.setAdapter(mAdapter);
     }
 }

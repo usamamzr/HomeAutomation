@@ -1,11 +1,14 @@
 package com.example.usama.homeautomation.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.usama.homeautomation.Activities.RoomsActivity;
 import com.example.usama.homeautomation.Models.Floor;
 import com.example.usama.homeautomation.R;
 
@@ -19,11 +22,11 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mTextView;
+        TextView tv_NameFloor;
 
-        MyViewHolder(TextView v) {
-            super(v);
-            mTextView = v;
+        MyViewHolder(View itemView) {
+            super(itemView);
+            tv_NameFloor = itemView.findViewById(R.id.tv_nameFloor);
         }
     }
 
@@ -34,7 +37,7 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
 
     @Override
     public FloorsRecyclerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.single_floor, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_floor, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
@@ -42,13 +45,20 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.mTextView.setText(mDataset[position]);
+        holder.tv_NameFloor.setText(this.listItems.get(position).getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RoomsActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+
 
     }
 
     @Override
     public int getItemCount() {
-//        return mDataset.length;
-        return 0;
+        return listItems.size();
     }
 }
