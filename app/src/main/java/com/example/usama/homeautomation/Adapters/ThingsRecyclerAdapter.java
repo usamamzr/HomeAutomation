@@ -23,7 +23,7 @@ public class ThingsRecyclerAdapter extends RecyclerView.Adapter<ThingsRecyclerAd
 
         MyViewHolder(View itemView) {
             super(itemView);
-            tv_NameThing = itemView.findViewById(R.id.tv_nameFloor);
+            tv_NameThing = itemView.findViewById(R.id.tv_nameThing);
         }
     }
 

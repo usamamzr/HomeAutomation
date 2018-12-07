@@ -1,12 +1,14 @@
 package com.example.usama.homeautomation.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.usama.homeautomation.Activities.ThingsActivity;
 import com.example.usama.homeautomation.Models.Room;
 import com.example.usama.homeautomation.R;
 
@@ -43,6 +45,13 @@ public class RoomsRecyclerAdapter extends RecyclerView.Adapter<RoomsRecyclerAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         holder.tv_nameRoom.setText(this.listItems.get(position).getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ThingsActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
 
     }
 

@@ -30,6 +30,11 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
         }
     }
 
+    public void setFloorsList (ArrayList<Floor> arrayList) {
+        this.listItems = arrayList;
+        notifyDataSetChanged();
+    }
+
     public FloorsRecyclerAdapter(ArrayList<Floor> arrayList) {
         this.listItems = arrayList;
     }
@@ -45,7 +50,7 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.tv_NameFloor.setText(this.listItems.get(position).getName());
+        holder.tv_NameFloor.setText(this.listItems.get(position).getFName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

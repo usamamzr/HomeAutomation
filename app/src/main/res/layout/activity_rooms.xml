@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".Activities.RoomsActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -13,11 +14,5 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
-    <Button
-        android:id="@+id/btn_addRoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="add new room"
-        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
