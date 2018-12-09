@@ -23,12 +23,16 @@ public class ThingsRecyclerAdapter extends RecyclerView.Adapter<ThingsRecyclerAd
 
         MyViewHolder(View itemView) {
             super(itemView);
-            tv_NameThing = itemView.findViewById(R.id.tv_nameFloor);
+            tv_NameThing = itemView.findViewById(R.id.tv_nameThing);
         }
     }
 
     public ThingsRecyclerAdapter(ArrayList<Thing> arrayList) {
         this.listItems = arrayList;
+    }
+    public void setThinglist(ArrayList<Thing> arrayList){
+        this.listItems=arrayList;
+        notifyDataSetChanged();
     }
 
 
@@ -42,7 +46,7 @@ public class ThingsRecyclerAdapter extends RecyclerView.Adapter<ThingsRecyclerAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.tv_NameThing.setText(this.listItems.get(position).getName());
+        holder.tv_NameThing.setText(this.listItems.get(position).getTName());
 
     }
 
