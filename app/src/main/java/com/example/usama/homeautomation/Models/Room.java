@@ -50,6 +50,9 @@ public class Room {
         this.updatedAt = updatedAt;
     }
 
+    public Room(String s) {
+    }
+
     public Integer getId() {
         return id;
     }

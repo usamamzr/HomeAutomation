@@ -1,7 +1,9 @@
 package com.example.usama.homeautomation.Activities;
 
 import android.content.DialogInterface;
+import android.graphics.Path;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +13,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.usama.homeautomation.API.LaravelAPI;
+import com.example.usama.homeautomation.API.OpenhabAPI;
 import com.example.usama.homeautomation.Adapters.ThingsRecyclerAdapter;
+import com.example.usama.homeautomation.Models.TblItem;
 import com.example.usama.homeautomation.Models.Thing;
+import com.example.usama.homeautomation.MyDialogFragment;
 import com.example.usama.homeautomation.R;
 import com.example.usama.homeautomation.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +36,7 @@ public class ThingsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private int RoomId;
+    private List<TblItem> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,23 @@ public class ThingsActivity extends AppCompatActivity {
                 Log.i("responseCheckThings", "onFailure(): " + "call: " + call + " t: " + t);
             }
         });
+
+        OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
+        Call<List<TblItem>> ItemList = service2.getItemList();
+        ItemList.enqueue(new Callback<List<TblItem>>() {
+            @Override
+            public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {
+                itemList = response.body();
+                Log.i("responseCheckItems", "onResponse(): " + "call: " + call + " response: " + response);
+            }
+
+            @Override
+            public void onFailure(Call<List<TblItem>> call, Throwable t) {
+                Log.i("responseCheckItems", "onFailure(): " + "call: " + call + " t: " + t);
+            }
+        });
+
+
     }
 
     @Override
@@ -82,32 +106,35 @@ public class ThingsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.navigation_add) {
-// setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Choose some animals");
+            MyDialogFragment myDialogFragment = new MyDialogFragment();
+            myDialogFragment.show(getSupportFragmentManager(), "MyFragment");
 
-// add a checkbox list
-            String[] animals = {"horse", "cow", "camel", "sheep", "goat"};
-            boolean[] checkedItems = {true, false, false, true, false};
-            builder.setMultiChoiceItems(animals, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    // user checked or unchecked a box
-                }
-            });
-
-// add OK and Cancel buttons
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // user clicked OK
-                }
-            });
-            builder.setNegativeButton("Cancel", null);
-
-// create and show the alert dialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
+//// setup the alert builder
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setTitle("Choose Things");
+//
+//// add a checkbox list
+//            String[] animals = {"horse", "cow", "camel", "sheep", "goat"};
+//            boolean[] checkedItems = null; /*{true, false, false, true, false}*/;
+//            builder.setMultiChoiceItems(animals, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+//                    // user checked or unchecked a box
+//                }
+//            });
+//
+//// add OK and Cancel buttons
+//            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    // user clicked OK
+//                }
+//            });
+//            builder.setNegativeButton("Cancel", null);
+//
+//// create and show the alert dialog
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
         }
         return super.onOptionsItemSelected(item);
     }

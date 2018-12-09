@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 
 public interface OpenhabAPI {
 
-    String BaseURL = "http://192.168.0.136:8080/rest/";
+    String BaseURL = "http://192.168.10.16:8080/rest/";
 
     @GET("items")
     Call<List<TblItem>> getItemList();

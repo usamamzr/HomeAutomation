@@ -77,7 +77,7 @@ public interface LaravelAPI {
     Call<Thing> getSingleThing();
 
     @GET("things/ByroomId/{id}")
-    Call<ArrayList<Thing>> getThingByRoom(@Path("id") int roomId);
+    Call<ArrayList<Thing> >getThingByRoom(@Path("id") int roomId);
 
     @POST("things")
     @FormUrlEncoded
