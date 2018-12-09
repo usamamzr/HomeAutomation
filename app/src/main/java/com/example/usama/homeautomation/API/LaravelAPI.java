@@ -48,22 +48,22 @@ public interface LaravelAPI {
     @GET("rooms/{id}")
     Call<Room> getSingleRoom();
 
-    @GET("rooms/ByfloorId/{floorid}")
-    Call<Room> getSingleRoomByFloor();
+    @GET("rooms/ByfloorId/{floorId}")
+    Call<ArrayList<Room>> getRoomByFloor(@Path("floorId") String floorId);
 
     @POST("rooms")
     @FormUrlEncoded
     Call<Room> addRooms(@Field("id") String roomID,
-                         @Field("rName") String name,
-                         @Field("Icon") String icon,
-                         @Field("FloorId") String floorID);
+                        @Field("rName") String name,
+                        @Field("Icon") String icon,
+                        @Field("FloorId") String floorID);
 
     @PUT("rooms/{id}")
     @FormUrlEncoded
     Call<Room> updateRoom(@Path("id") String roomID,
-                           @Field("rName") String name,
-                           @Field("Icon") String icon,
-                           @Field("FloorId") String floorID);
+                          @Field("rName") String name,
+                          @Field("Icon") String icon,
+                          @Field("FloorId") String floorID);
 
     @DELETE("rooms/{id}")
     Call<String> deleteRoom(@Path("id") String roomID);
@@ -77,19 +77,19 @@ public interface LaravelAPI {
     Call<Thing> getSingleThing();
 
     @GET("things/ByroomId/{id}")
-    Call<Thing> getSingleThingByRoom();
+    Call<ArrayList<Thing>> getThingByRoom(@Path("id") int roomId);
 
     @POST("things")
     @FormUrlEncoded
     Call<Thing> addThings(@Field("id") String thingID,
-                         @Field("tName") String name,
-                         @Field("RoomId") String roomID);
+                          @Field("tName") String name,
+                          @Field("RoomId") String roomID);
 
     @PUT("things/{id}")
     @FormUrlEncoded
     Call<Floor> updateThing(@Path("id") String thingID,
-                           @Field("tName") String name,
-                           @Field("RoomId") String roomID);
+                            @Field("tName") String name,
+                            @Field("RoomId") String roomID);
 
     @DELETE("things/{id}")
     Call<String> deleteThing(@Path("id") String thingID);

@@ -30,6 +30,10 @@ public class ThingsRecyclerAdapter extends RecyclerView.Adapter<ThingsRecyclerAd
     public ThingsRecyclerAdapter(ArrayList<Thing> arrayList) {
         this.listItems = arrayList;
     }
+    public void setThinglist(ArrayList<Thing> arrayList){
+        this.listItems=arrayList;
+        notifyDataSetChanged();
+    }
 
 
     @Override
@@ -42,7 +46,7 @@ public class ThingsRecyclerAdapter extends RecyclerView.Adapter<ThingsRecyclerAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.tv_NameThing.setText(this.listItems.get(position).getName());
+        holder.tv_NameThing.setText(this.listItems.get(position).getTName());
 
     }
 

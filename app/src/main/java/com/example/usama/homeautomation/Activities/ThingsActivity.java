@@ -1,34 +1,49 @@
 package com.example.usama.homeautomation.Activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.usama.homeautomation.API.LaravelAPI;
 import com.example.usama.homeautomation.Adapters.ThingsRecyclerAdapter;
 import com.example.usama.homeautomation.Models.Thing;
 import com.example.usama.homeautomation.R;
+import com.example.usama.homeautomation.RetrofitClient;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ThingsActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ThingsRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private int RoomId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_things);
+        if (getIntent() != null) {
+            RoomId = getIntent().getIntExtra("roomId", 0);
+        }
 
         final ArrayList<Thing> arrayList = new ArrayList<>();
 
-        for (int i = 1; i <= 10; i++) {
-            arrayList.add(new Thing("Item: " + i));
-        }
+//        for (int i = 1; i <= 10; i++) {
+//            arrayList.add(new Thing("Item: " + i));
+//        }
 
         mRecyclerView = findViewById(R.id.things_recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -36,6 +51,23 @@ public class ThingsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new ThingsRecyclerAdapter(arrayList);
         mRecyclerView.setAdapter(mAdapter);
+
+        Retrofit retrofit = RetrofitClient.getRetrofit();
+        LaravelAPI service = retrofit.create(LaravelAPI.class);
+        Call<ArrayList<Thing>> ThingList = service.getThingByRoom(RoomId);
+        ThingList.enqueue(new Callback<ArrayList<Thing>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Thing>> call, Response<ArrayList<Thing>> response) {
+                ArrayList<Thing> things = response.body();
+                mAdapter.setThinglist(things);
+                Log.i("responseCheckThings", "onResponse(): " + "call: " + call + " response: " + response);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Thing>> call, Throwable t) {
+                Log.i("responseCheckThings", "onFailure(): " + "call: " + call + " t: " + t);
+            }
+        });
     }
 
     @Override
@@ -50,7 +82,32 @@ public class ThingsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.navigation_add) {
+// setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Choose some animals");
 
+// add a checkbox list
+            String[] animals = {"horse", "cow", "camel", "sheep", "goat"};
+            boolean[] checkedItems = {true, false, false, true, false};
+            builder.setMultiChoiceItems(animals, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    // user checked or unchecked a box
+                }
+            });
+
+// add OK and Cancel buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // user clicked OK
+                }
+            });
+            builder.setNegativeButton("Cancel", null);
+
+// create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
         return super.onOptionsItemSelected(item);
     }

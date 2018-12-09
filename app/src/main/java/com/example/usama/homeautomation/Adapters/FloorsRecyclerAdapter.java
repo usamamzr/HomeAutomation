@@ -55,6 +55,7 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RoomsActivity.class);
+                intent.putExtra("floorId",listItems.get(position).getId());
                 view.getContext().startActivity(intent);
             }
         });

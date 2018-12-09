@@ -33,6 +33,11 @@ public class RoomsRecyclerAdapter extends RecyclerView.Adapter<RoomsRecyclerAdap
         this.listItems = arrayList;
     }
 
+    public void setRoomList (ArrayList<Room> arrayList){
+        this.listItems = arrayList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public RoomsRecyclerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,11 +49,12 @@ public class RoomsRecyclerAdapter extends RecyclerView.Adapter<RoomsRecyclerAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.tv_nameRoom.setText(this.listItems.get(position).getName());
+        holder.tv_nameRoom.setText(this.listItems.get(position).getRName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ThingsActivity.class);
+                intent.putExtra("roomId",listItems.get(position).getId());
                 view.getContext().startActivity(intent);
             }
         });
