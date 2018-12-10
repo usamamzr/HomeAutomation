@@ -3,6 +3,7 @@ package com.example.usama.homeautomation.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,25 +44,53 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = et_password.getText().toString().trim();
                 String confirmPass = et_CPassword.getText().toString().trim();
 
-                Retrofit retrofit = RetrofitClient.getRetrofit();
-                final LaravelAPI service = retrofit.create(LaravelAPI.class);
-                Call<User> signUp = service.registerUser(name, email, password, confirmPass);
+                boolean cancel = false;
+                if (TextUtils.isEmpty(name)) {
+                    et_name.setError("Field required");
+                    view = et_name;
+                    cancel = true;
+                }
+                if (TextUtils.isEmpty(email)) {
+                    et_email.setError("Field required");
+                    view = et_email;
+                    cancel = true;
+                }
+                // Check for a valid password, if the user entered one.
+                if (TextUtils.isEmpty(password)) {
+                    et_password.setError("Field required");
+                    view = et_password;
+                    cancel = true;
+                }
+                if (TextUtils.isEmpty(confirmPass)) {
+                    et_CPassword.setError("Field required");
+                    view = et_CPassword;
+                    cancel = true;
+                }
 
-                signUp.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        Log.i("responseSignUp", "onResponse(): " + "call: " + call + " response: " + response);
-                    }
+                if (cancel) {
+                    view.requestFocus();
+                } else {
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(SignUpActivity.this, "Failed to register user", Toast.LENGTH_LONG).show();
-                        Log.i("responseSignUp", "onFailure(): " + "call: " + call + " t: " + t);
-                    }
-                });
+                    Retrofit retrofit = RetrofitClient.getRetrofit();
+                    final LaravelAPI service = retrofit.create(LaravelAPI.class);
+                    Call<User> signUp = service.registerUser(name, email, password, confirmPass);
+
+                    signUp.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            Log.i("responseSignUp", "onResponse(): " + "call: " + call + " response: " + response);
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(SignUpActivity.this, "Failed to register user", Toast.LENGTH_LONG).show();
+                            Log.i("responseSignUp", "onFailure(): " + "call: " + call + " t: " + t);
+                        }
+                    });
+                }
             }
         });
     }

@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.usama.homeautomation.API.LaravelAPI;
 import com.example.usama.homeautomation.Adapters.FloorsRecyclerAdapter;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList arrayList = new ArrayList();
     Retrofit retrofit = RetrofitClient.getRetrofit();
     final LaravelAPI service = retrofit.create(LaravelAPI.class);
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
             builder.setMessage("Enter Floor Name").setTitle("Enter Floor here");
             builder.setView(editText);
-            builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     Call<Floor> SetFloor = service.addFloors(editText.getText().toString());
                     SetFloor.enqueue(new Callback<Floor>() {
@@ -140,8 +142,11 @@ public class MainActivity extends AppCompatActivity {
                             Log.i("responseAddFloor", "onFailure(): call: " + call + ", " + "t: " + t);
                         }
                     });
-
-
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.img_dialogue, null);
+                    builder.setView(view);
+                    AlertDialog dialog1 = builder.create();
+                    dialog1.show();*/
                 }
             });
             builder.setNegativeButton("Exit", new DialogInterface.OnClickListener()
@@ -175,5 +180,20 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void selectImg1(View view) {
+        String name = getResources().getResourceEntryName(R.drawable.icons8_1_48);
+        Toast.makeText(this, "" + name, Toast.LENGTH_SHORT).show();
+    }
+
+    public void selectImg2 (View view) {
+        String name = getResources().getResourceEntryName(R.drawable.icons8_2_48);
+        Toast.makeText(this, " " + name, Toast.LENGTH_SHORT).show();
+    }
+
+    public void selectImg3 (View view) {
+        String name = getResources().getResourceEntryName(R.drawable.icons8_3_48);
+        Toast.makeText(this, " " + name, Toast.LENGTH_SHORT).show();
     }
 }
