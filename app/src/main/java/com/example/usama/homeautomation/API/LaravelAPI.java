@@ -5,8 +5,10 @@ import com.example.usama.homeautomation.Models.Room;
 import com.example.usama.homeautomation.Models.Thing;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -79,9 +81,12 @@ public interface LaravelAPI {
 
     @POST("things")
     @FormUrlEncoded
-    Call<Thing> addThings(@Field("id") String thingID,
+    Call<Thing> addThings(
+//            @Body List<Thing> thingList
+//            @Field("id") String thingID,
                           @Field("tName") String name,
-                          @Field("RoomId") String roomID);
+                          @Field("RoomId") String roomID
+    );
 
     @PUT("things/{id}")
     @FormUrlEncoded

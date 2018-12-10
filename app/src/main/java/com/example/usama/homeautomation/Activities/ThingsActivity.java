@@ -36,7 +36,7 @@ public class ThingsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private int RoomId;
-    private List<TblItem> itemList;
+    private List<TblItem> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class ThingsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ThingsRecyclerAdapter(arrayList);
+        mAdapter = new ThingsRecyclerAdapter(itemList);
         mRecyclerView.setAdapter(mAdapter);
 
         Retrofit retrofit = RetrofitClient.getRetrofit();
@@ -66,28 +66,55 @@ public class ThingsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Thing>> call, Response<ArrayList<Thing>> response) {
                 ArrayList<Thing> things = response.body();
-                mAdapter.setThinglist(things);
+
                 Log.i("responseCheckThings", "onResponse(): " + "call: " + call + " response: " + response);
+                Log.i("responsethings", "onResponse: size: " + things.size());
+
+                OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
+                Call<List<TblItem>> ItemList = service2.getItemList();
+                ItemList.enqueue(new Callback<List<TblItem>>() {
+                    @Override
+                    public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {
+                        itemList = response.body();
+
+                        Log.i("responseCheckItems", "onResponse(): " + "call: " + call + " response: " + response);
+
+                        if (things.size() == 0) {
+                            itemList.removeAll(itemList);
+
+                        } else {
+
+                            for (int i = itemList.size() - 1; i >= 0; i--) {
+                                int j= things.size()-1;
+                                boolean check=true;
+                                do {
+                                    if (!itemList.get(i).getName().equals(things.get(j).getTName())) {
+                                        j--;
+                                    }
+                                    else{
+                                        check=false;
+                                        j--;
+                                    }
+                                }while(j>=0);
+                                if(check==true){
+                                    itemList.remove(i);
+                                }
+                            }
+                        }
+                        Log.i("responseitems", "onResponse: size: " + itemList.size());
+                        mAdapter.setThinglist(itemList);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<TblItem>> call, Throwable t) {
+                        Log.i("responseCheckItems", "onFailure(): " + "call: " + call + " t: " + t);
+                    }
+                });
             }
 
             @Override
             public void onFailure(Call<ArrayList<Thing>> call, Throwable t) {
                 Log.i("responseCheckThings", "onFailure(): " + "call: " + call + " t: " + t);
-            }
-        });
-
-        OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
-        Call<List<TblItem>> ItemList = service2.getItemList();
-        ItemList.enqueue(new Callback<List<TblItem>>() {
-            @Override
-            public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {
-                itemList = response.body();
-                Log.i("responseCheckItems", "onResponse(): " + "call: " + call + " response: " + response);
-            }
-
-            @Override
-            public void onFailure(Call<List<TblItem>> call, Throwable t) {
-                Log.i("responseCheckItems", "onFailure(): " + "call: " + call + " t: " + t);
             }
         });
 
@@ -108,7 +135,7 @@ public class ThingsActivity extends AppCompatActivity {
         if (id == R.id.navigation_add) {
             MyDialogFragment myDialogFragment = new MyDialogFragment();
             Bundle data = new Bundle();//Use bundle to pass data
-            data.putInt("RoomId",RoomId);//put string, int, etc in bundle with a key value
+            data.putInt("RoomId", RoomId);//put string, int, etc in bundle with a key value
             myDialogFragment.setArguments(data);
             myDialogFragment.show(getSupportFragmentManager(), "MyFragment");
 

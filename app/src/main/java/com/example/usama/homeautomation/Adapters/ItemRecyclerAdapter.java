@@ -15,6 +15,7 @@ import com.example.usama.homeautomation.Models.TblItem;
 import com.example.usama.homeautomation.Models.Thing;
 import com.example.usama.homeautomation.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapter.ViewHolder> {
@@ -22,7 +23,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
     List<TblItem> arrayList;
     private Context context;
     private String RoomId;
-    private List<Thing> Itemlistnew;
+    private List<Thing> Itemlistnew= new ArrayList<>();
 
 
 
@@ -45,11 +46,17 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
         notifyDataSetChanged();
     }
 
+    public List<Thing> getItemList(){
+
+        return Itemlistnew;
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         CheckBox checkBox = itemView.findViewById(R.id.checkBox);
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.setIsRecyclable(false);
         }
     }
     @Override
@@ -61,7 +68,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
                if(viewHolder.checkBox.isChecked()){
-//                   Toast.makeText(context,arrayList.get(i).getName()+" isChecked()", Toast.LENGTH_SHORT).show();
+//                 Toast.makeText(context,arrayList.get(i).getName()+" isChecked()", Toast.LENGTH_SHORT).show();
 
                    Thing itemnew = new Thing();
                    itemnew.setTName(arrayList.get(i).getName());
@@ -69,18 +76,10 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
 
                    Itemlistnew.add(itemnew);
                    arrayList.remove(i);
-
+                   notifyItemRemoved(i);
+                   notifyDataSetChanged();
                    Toast.makeText(context, ""+Itemlistnew.size(), Toast.LENGTH_SHORT).show();
                }
-//               if(!viewHolder.checkBox.isChecked()){
-//                   Toast.makeText(context,arrayList.get(i).getName()+" isUnChecked()", Toast.LENGTH_SHORT).show();
-//
-//                   Thing itemnew = new Thing();
-//                   itemnew.setTName(arrayList.get(i).getName());
-//                   itemnew.setRoomId(RoomId);
-//
-//                   Itemlistnew.remove(itemnew);
-//               }
            }
        });
     }
