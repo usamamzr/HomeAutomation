@@ -393,6 +393,7 @@ color cardview_shadow_start_color
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
+color colorPrimaryLight
 color colorTransparent
 color colorWhite
 color dim_foreground_disabled_material_dark
@@ -430,6 +431,7 @@ color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
 color ripple_material_dark
 color ripple_material_light
+color secondaryText
 color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
@@ -648,8 +650,11 @@ drawable abc_vector_test
 drawable button
 drawable edit_text
 drawable grad_back
+drawable ic_add_black_24dp
+drawable ic_chevron_right_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_power_settings_new_black_48dp
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -697,10 +702,8 @@ id barrier
 id beginning
 id blocking
 id bottom
-id btn_addFloor
-id btn_addRoom
-id btn_addThing
 id btn_login
+id btn_signUp
 id btn_signup
 id buttonPanel
 id chains
@@ -747,6 +750,8 @@ id list_item
 id message
 id middle
 id multiply
+id navigation_add
+id navigation_logout
 id never
 id none
 id normal
@@ -820,7 +825,7 @@ id tv_password
 id uniform
 id up
 id useLogo
-id webview
+id videoView
 id withText
 id wrap
 id wrap_content
@@ -861,6 +866,7 @@ layout activity_main
 layout activity_rooms
 layout activity_sign_up
 layout activity_things
+layout new_dialouge
 layout notification_action
 layout notification_action_tombstone
 layout notification_template_custom_big
@@ -875,6 +881,8 @@ layout single_room
 layout single_thing
 layout support_simple_spinner_dropdown_item
 layout tooltip
+menu add_menu
+menu logout
 mipmap ic_launcher
 mipmap ic_launcher_round
 string abc_action_bar_home_description

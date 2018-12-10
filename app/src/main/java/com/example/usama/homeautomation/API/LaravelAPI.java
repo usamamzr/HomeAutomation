@@ -3,6 +3,7 @@ package com.example.usama.homeautomation.API;
 import com.example.usama.homeautomation.Models.Floor;
 import com.example.usama.homeautomation.Models.Room;
 import com.example.usama.homeautomation.Models.Thing;
+import com.example.usama.homeautomation.Models.User;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,22 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface LaravelAPI {
+    /////////////////   USERS  //////////////////////
+
+    @POST("register")
+    @FormUrlEncoded
+    Call<User> registerUser(@Field("name") String name,
+                            @Field("email") String email,
+                            @Field("password") String password,
+                            @Field("password_confirmation") String confirmPassword);
+
+    @POST("login")
+    @FormUrlEncoded
+    Call<User> loginUser(@Field("email") String email,
+                         @Field("password") String password);
+
+    @POST("logout")
+    Call<User> logoutUser();
 
     /////////////////   FLOORS  //////////////////////
 
