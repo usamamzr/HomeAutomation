@@ -33,6 +33,9 @@ public class RoomsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private int FloorId;
 
+    Retrofit retrofit = RetrofitClient.getRetrofit();
+    final LaravelAPI service = retrofit.create(LaravelAPI.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +59,7 @@ public class RoomsActivity extends AppCompatActivity {
         mAdapter = new RoomsRecyclerAdapter(arrayList);
         mRecyclerView.setAdapter(mAdapter);
 
-        Retrofit retrofit = RetrofitClient.getRetrofit();
-        final LaravelAPI service = retrofit.create(LaravelAPI.class);
+
         Call<ArrayList<Room>> roomsList = service.getRoomByFloor(String.valueOf(FloorId));
 
         roomsList.enqueue(new Callback<ArrayList<Room>>() {
@@ -93,11 +95,23 @@ public class RoomsActivity extends AppCompatActivity {
             View view = LayoutInflater.from(RoomsActivity.this).inflate(R.layout.new_dialouge, null);
             builder.setView(view);
             final EditText editText = new EditText(RoomsActivity.this);
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            editText.setInputType(InputType.TYPE_CLASS_TEXT);
             builder.setMessage("Enter Room Name").setTitle("Enter Room here");
             builder.setView(editText);
             builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                    Call<Room> SetRoom= service.addRooms(editText.getText().toString(),FloorId);
+                    SetRoom.enqueue(new Callback<Room>() {
+                        @Override
+                        public void onResponse(Call<Room> call, Response<Room> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Room> call, Throwable t) {
+
+                        }
+                    });
                 }
             });
             builder.setNegativeButton("Exit", new DialogInterface.OnClickListener()

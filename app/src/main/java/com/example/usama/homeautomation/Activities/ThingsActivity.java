@@ -107,6 +107,9 @@ public class ThingsActivity extends AppCompatActivity {
 
         if (id == R.id.navigation_add) {
             MyDialogFragment myDialogFragment = new MyDialogFragment();
+            Bundle data = new Bundle();//Use bundle to pass data
+            data.putInt("RoomId",RoomId);//put string, int, etc in bundle with a key value
+            myDialogFragment.setArguments(data);
             myDialogFragment.show(getSupportFragmentManager(), "MyFragment");
 
 //// setup the alert builder
