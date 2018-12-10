@@ -61,23 +61,26 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
                if(viewHolder.checkBox.isChecked()){
-                   Toast.makeText(context,arrayList.get(i).getName()+" isChecked()", Toast.LENGTH_SHORT).show();
+//                   Toast.makeText(context,arrayList.get(i).getName()+" isChecked()", Toast.LENGTH_SHORT).show();
 
                    Thing itemnew = new Thing();
                    itemnew.setTName(arrayList.get(i).getName());
                    itemnew.setRoomId(RoomId);
 
                    Itemlistnew.add(itemnew);
-               }
-               if(!viewHolder.checkBox.isChecked()){
-                   Toast.makeText(context,arrayList.get(i).getName()+" isUnChecked()", Toast.LENGTH_SHORT).show();
+                   arrayList.remove(i);
 
-                   Thing itemnew = new Thing();
-                   itemnew.setTName(arrayList.get(i).getName());
-                   itemnew.setRoomId(RoomId);
-
-                   Itemlistnew.remove(itemnew);
+                   Toast.makeText(context, ""+Itemlistnew.size(), Toast.LENGTH_SHORT).show();
                }
+//               if(!viewHolder.checkBox.isChecked()){
+//                   Toast.makeText(context,arrayList.get(i).getName()+" isUnChecked()", Toast.LENGTH_SHORT).show();
+//
+//                   Thing itemnew = new Thing();
+//                   itemnew.setTName(arrayList.get(i).getName());
+//                   itemnew.setRoomId(RoomId);
+//
+//                   Itemlistnew.remove(itemnew);
+//               }
            }
        });
     }
