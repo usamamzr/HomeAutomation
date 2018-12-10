@@ -1,6 +1,5 @@
 package com.example.usama.homeautomation.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
 
         if (!token.equals("")) {

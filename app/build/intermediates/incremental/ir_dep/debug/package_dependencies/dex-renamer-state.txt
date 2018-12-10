@@ -1,4 +1,0 @@
-#Wed Dec 05 23:37:29 PKT 2018
-base.0=C\:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
-path.0=classes.dex
-renamed.0=classes.dex
