@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -65,40 +66,58 @@ public class LoginActivity extends AppCompatActivity {
                 String email = et_email.getText().toString().trim();
                 String password = et_password.getText().toString().trim();
 
-                Retrofit retrofit = RetrofitClient.getRetrofit();
-                final LaravelAPI service = retrofit.create(LaravelAPI.class);
-                Call<User> login = service.loginUser(email, password);
+                boolean cancel = false;
+                if (TextUtils.isEmpty(email)) {
+                    et_email.setError("Field required");
+                    view = et_email;
+                    cancel = true;
+                }
+                // Check for a valid password, if the user entered one.
+                if (TextUtils.isEmpty(password)) {
+                    et_password.setError("Field required");
+                    view = et_password;
+                    cancel = true;
+                }
 
-                login.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Gson gson = new Gson();
-                        User userDetail = response.body();
-                        if (!(response.body() == null)) {
-                            if (userDetail != null) {
-                                String apiToken = userDetail.getApiToken();
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("token", apiToken);
-                                editor.apply();
+                if (cancel) {
+                    view.requestFocus();
+                } else {
+
+                    Retrofit retrofit = RetrofitClient.getRetrofit();
+                    final LaravelAPI service = retrofit.create(LaravelAPI.class);
+                    Call<User> login = service.loginUser(email, password);
+
+                    login.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            Gson gson = new Gson();
+                            User userDetail = response.body();
+                            if (!(response.body() == null)) {
+                                if (userDetail != null) {
+                                    String apiToken = userDetail.getApiToken();
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("token", apiToken);
+                                    editor.apply();
+                                }
+
+                                sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                et_password.getText().clear();
+                                finish();
                             }
-
-                            sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                            Log.i("responseLogin", "onResponse(): " + "call: " + call + " response: " + response);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
-                            et_password.getText().clear();
-                            finish();
                         }
-                        Log.i("responseLogin", "onResponse(): " + "call: " + call + " response: " + response);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Failed to log in", Toast.LENGTH_LONG).show();
-                        Log.i("responseLogin", "onFailure(): " + "call: " + call + " t: " + t);
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(LoginActivity.this, "Failed to log in", Toast.LENGTH_LONG).show();
+                            Log.i("responseLogin", "onFailure(): " + "call: " + call + " t: " + t);
+                        }
+                    });
+                }
             }
         });
 
