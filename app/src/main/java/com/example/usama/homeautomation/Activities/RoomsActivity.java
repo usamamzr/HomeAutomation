@@ -3,6 +3,7 @@ package com.example.usama.homeautomation.Activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,7 @@ public class RoomsActivity extends AppCompatActivity {
     private RoomsRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private int FloorId;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     Retrofit retrofit = RetrofitClient.getRetrofit();
     final LaravelAPI service = retrofit.create(LaravelAPI.class);
@@ -76,7 +78,30 @@ public class RoomsActivity extends AppCompatActivity {
             }
         });
 
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshRooms);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Call<ArrayList<Room>> roomsList = service.getRoomByFloor(String.valueOf(FloorId));
 
+                roomsList.enqueue(new Callback<ArrayList<Room>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Room>> call, Response<ArrayList<Room>> response) {
+                        ArrayList<Room> rooms = response.body();
+                        mAdapter.setRoomList(rooms);
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.i("responseCheckRoom", "onResponse(): " + "call: " + call + " response: " + response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Room>> call, Throwable t) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.i("responseCheckRoom", "onFailure(): " + "call: " + call + " t: " + t);
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -104,12 +129,12 @@ public class RoomsActivity extends AppCompatActivity {
                     SetRoom.enqueue(new Callback<Room>() {
                         @Override
                         public void onResponse(Call<Room> call, Response<Room> response) {
-
+                            Log.i("responseCheckAddRoom", "onResponse(): " + "call: " + call + " response: " + response);
                         }
 
                         @Override
                         public void onFailure(Call<Room> call, Throwable t) {
-
+                            Log.i("responseCheckAddRoom", "onFailure(): " + "call: " + call + " t: " + t);
                         }
                     });
                 }

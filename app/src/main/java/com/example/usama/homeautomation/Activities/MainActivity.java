@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -16,15 +18,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.JsResult;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.EditText;
 
 import com.example.usama.homeautomation.API.LaravelAPI;
 import com.example.usama.homeautomation.Adapters.FloorsRecyclerAdapter;
 import com.example.usama.homeautomation.Models.Floor;
+import com.example.usama.homeautomation.Models.User;
 import com.example.usama.homeautomation.R;
 import com.example.usama.homeautomation.RetrofitClient;
 
@@ -39,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private FloorsRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    SwipeRefreshLayout swipeRefreshLayout;
     private Context context;
     ArrayList arrayList = new ArrayList();
     Retrofit retrofit = RetrofitClient.getRetrofit();
     final LaravelAPI service = retrofit.create(LaravelAPI.class);
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +79,37 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("responseCheckFloor", "onFailure(): " + "call: " + call + " t: " + t);
             }
         });
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshFloors);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Call<ArrayList<Floor>> floorsList = service.getFloorsList();
+
+                floorsList.enqueue(new Callback<ArrayList<Floor>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Floor>> call, Response<ArrayList<Floor>> response) {
+                        ArrayList floorsDetailList = response.body();
+                        mAdapter.setFloorsList(floorsDetailList);
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.i("responseCheckFloor", "onResponse(): " + "call: " + call + " response: " + response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Floor>> call, Throwable t) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.i("responseCheckFloor", "onFailure(): " + "call: " + call + " t: " + t);
+                    }
+                });
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_menu, menu);
+        getMenuInflater().inflate(R.menu.logout, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -105,12 +132,12 @@ public class MainActivity extends AppCompatActivity {
                     SetFloor.enqueue(new Callback<Floor>() {
                         @Override
                         public void onResponse(Call<Floor> call, Response<Floor> response) {
-
+                            Log.i("responseAddFloor", "onResponse(): call: " + call + ", " + "response: " + response);
                         }
 
                         @Override
                         public void onFailure(Call<Floor> call, Throwable t) {
-
+                            Log.i("responseAddFloor", "onFailure(): call: " + call + ", " + "t: " + t);
                         }
                     });
 
@@ -126,6 +153,26 @@ public class MainActivity extends AppCompatActivity {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
+        } else if (id == R.id.navigation_logout) {
+            Retrofit retrofit = RetrofitClient.getRetrofit();
+            final LaravelAPI service = retrofit.create(LaravelAPI.class);
+            Call<User> logout = service.logoutUser();
+
+            logout.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                    sharedPreferences.edit().clear().apply();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
         }
         return super.onOptionsItemSelected(item);
     }
