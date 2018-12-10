@@ -23,6 +23,8 @@ import com.example.usama.homeautomation.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,46 +72,54 @@ public class ThingsActivity extends AppCompatActivity {
                 Log.i("responseCheckThings", "onResponse(): " + "call: " + call + " response: " + response);
                 Log.i("responsethings", "onResponse: size: " + things.size());
 
-                OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
-                Call<List<TblItem>> ItemList = service2.getItemList();
-                ItemList.enqueue(new Callback<List<TblItem>>() {
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
                     @Override
-                    public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {
-                        itemList = response.body();
+                    public void run() {
+                        OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
+                        Call<List<TblItem>> ItemList = service2.getItemList();
+                        ItemList.enqueue(new Callback<List<TblItem>>() {
+                            @Override
+                            public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {
+                                itemList = response.body();
 
-                        Log.i("responseCheckItems", "onResponse(): " + "call: " + call + " response: " + response);
+                                Log.i("responseCheckItems", "onResponse(): " + "call: " + call + " response: " + response);
 
-                        if (things.size() == 0) {
-                            itemList.removeAll(itemList);
+                                if (things.size() == 0) {
+                                    itemList.removeAll(itemList);
 
-                        } else {
+                                } else {
 
-                            for (int i = itemList.size() - 1; i >= 0; i--) {
-                                int j= things.size()-1;
-                                boolean check=true;
-                                do {
-                                    if (!itemList.get(i).getName().equals(things.get(j).getTName())) {
-                                        j--;
+                                    for (int i = itemList.size() - 1; i >= 0; i--) {
+                                        int j= things.size()-1;
+                                        boolean check=true;
+                                        do {
+                                            if (!itemList.get(i).getName().equals(things.get(j).getTName())) {
+                                                j--;
+                                            }
+                                            else{
+                                                check=false;
+                                                j--;
+                                            }
+                                        }while(j>=0);
+                                        if(check==true){
+                                            itemList.remove(i);
+                                        }
                                     }
-                                    else{
-                                        check=false;
-                                        j--;
-                                    }
-                                }while(j>=0);
-                                if(check==true){
-                                    itemList.remove(i);
                                 }
+                                Log.i("responseitems", "onResponse: size: " + itemList.size());
+                                mAdapter.setThinglist(itemList);
                             }
-                        }
-                        Log.i("responseitems", "onResponse: size: " + itemList.size());
-                        mAdapter.setThinglist(itemList);
-                    }
 
-                    @Override
-                    public void onFailure(Call<List<TblItem>> call, Throwable t) {
-                        Log.i("responseCheckItems", "onFailure(): " + "call: " + call + " t: " + t);
+                            @Override
+                            public void onFailure(Call<List<TblItem>> call, Throwable t) {
+                                Log.i("responseCheckItems", "onFailure(): " + "call: " + call + " t: " + t);
+                            }
+                        });
                     }
-                });
+                },1000,3000);
+
+
             }
 
             @Override

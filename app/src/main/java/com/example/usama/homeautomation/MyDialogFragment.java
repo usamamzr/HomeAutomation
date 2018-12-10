@@ -68,20 +68,24 @@ public class MyDialogFragment extends DialogFragment {
                     @Override
                     public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {
                         itemList = response.body();
-                        for (int i = itemList.size() - 1; i >= 0; i--) {
-                            int j= getitemlist.size()-1;
-                            boolean check=false;
-                            do {
-                                if (itemList.get(i).getName().equals(getitemlist.get(j).getTName())) {
-                                    j--;
-                                    check=true;
+                        if (getitemlist.size() == 0) {
+
+                        } else {
+
+                            for (int i = itemList.size() - 1; i >= 0; i--) {
+                                int j = getitemlist.size() - 1;
+                                boolean check = false;
+                                do {
+                                    if (itemList.get(i).getName().equals(getitemlist.get(j).getTName())) {
+                                        j--;
+                                        check = true;
+                                    } else {
+                                        j--;
+                                    }
+                                } while (j >= 0);
+                                if (check == true) {
+                                    itemList.remove(i);
                                 }
-                                else{
-                                    j--;
-                                }
-                            }while(j>=0);
-                            if(check==true){
-                                itemList.remove(i);
                             }
                         }
                         mAdapter.setItemList(itemList);

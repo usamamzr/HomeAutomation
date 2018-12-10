@@ -112,6 +112,9 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
                                         }
                                     });
                                 }
+                                else{
+                                    Toast.makeText(context, "Cannot Delete the Floor as it contains Rooms", Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override
