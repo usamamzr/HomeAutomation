@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private FloorsRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    SwipeRefreshLayout swipeRefreshLayout;
     private Context context;
     ArrayList arrayList = new ArrayList();
     Retrofit retrofit = RetrofitClient.getRetrofit();
     final LaravelAPI service = retrofit.create(LaravelAPI.class);
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,31 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("responseCheckFloor", "onFailure(): " + "call: " + call + " t: " + t);
             }
         });
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshFloors);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Call<ArrayList<Floor>> floorsList = service.getFloorsList();
+
+                floorsList.enqueue(new Callback<ArrayList<Floor>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Floor>> call, Response<ArrayList<Floor>> response) {
+                        ArrayList floorsDetailList = response.body();
+                        mAdapter.setFloorsList(floorsDetailList);
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.i("responseCheckFloor", "onResponse(): " + "call: " + call + " response: " + response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Floor>> call, Throwable t) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        Log.i("responseCheckFloor", "onFailure(): " + "call: " + call + " t: " + t);
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -104,12 +132,12 @@ public class MainActivity extends AppCompatActivity {
                     SetFloor.enqueue(new Callback<Floor>() {
                         @Override
                         public void onResponse(Call<Floor> call, Response<Floor> response) {
-
+                            Log.i("responseAddFloor", "onResponse(): call: " + call + ", " + "response: " + response);
                         }
 
                         @Override
                         public void onFailure(Call<Floor> call, Throwable t) {
-
+                            Log.i("responseAddFloor", "onFailure(): call: " + call + ", " + "t: " + t);
                         }
                     });
 

@@ -42,6 +42,9 @@ public interface LaravelAPI {
     @GET("floors/{id}")
     Call<Floor> getSingleFloor();
 
+    @GET("floors/checkRoom/{FloorId}")
+    Call<String> getRoom(@Path("FloorId") int floorID);
+
     @POST("floors")
     @FormUrlEncoded
     Call<Floor> addFloors(
@@ -54,7 +57,7 @@ public interface LaravelAPI {
                             @Field("Icon") String icon);
 
     @DELETE("floors/{id}")
-    Call<String> deleteFloor(@Path("id") String floorID);
+    Call<Floor> deleteFloor(@Path("id") int floorID);
 
     //////////////////////////////  ROOMS   //////////////////////////////////
 
@@ -66,6 +69,9 @@ public interface LaravelAPI {
 
     @GET("rooms/ByfloorId/{floorId}")
     Call<ArrayList<Room>> getRoomByFloor(@Path("floorId") String floorId);
+
+    @GET("rooms/checkThing/{RoomId}")
+    Call<String> getThing(@Path("RoomId") int roomID);
 
     @POST("rooms")
     @FormUrlEncoded
@@ -81,7 +87,7 @@ public interface LaravelAPI {
                           @Field("FloorId") String floorID);
 
     @DELETE("rooms/{id}")
-    Call<String> deleteRoom(@Path("id") String roomID);
+    Call<Room> deleteRoom(@Path("id") int roomID);
 
     //////////////////////////////  THINGS /////////////////////////////////
 
