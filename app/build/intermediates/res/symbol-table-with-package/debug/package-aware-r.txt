@@ -766,6 +766,7 @@ id fill_horizontal
 id fill_vertical
 id floors_recyclerView
 id forever
+id forgot_password
 id gone
 id group_divider
 id groups
@@ -917,6 +918,7 @@ layout activity_main
 layout activity_rooms
 layout activity_sign_up
 layout activity_things
+layout forgot_password_dialogue
 layout img_dialogue
 layout new_dialouge
 layout notification_action
