@@ -41,8 +41,8 @@ public interface LaravelAPI {
     @GET("floors")
     Call<ArrayList<Floor>> getFloorsList();
 
-    @GET("floors/{id}")
-    Call<Floor> getSingleFloor();
+    @GET("floors/{UserId}")
+    Call<ArrayList<Floor>> getByUser(@Path("UserId") String UserId);
 
     @GET("floors/checkRoom/{FloorId}")
     Call<String> getRoom(@Path("FloorId") int floorID);
@@ -50,7 +50,8 @@ public interface LaravelAPI {
     @POST("floors")
     @FormUrlEncoded
     Call<Floor> addFloors(
-                          @Field("fName") String name);
+                          @Field("fName") String name,
+                          @Field("UserId") String userId);
 
     @PUT("floors/{id}")
     @FormUrlEncoded
@@ -117,6 +118,6 @@ public interface LaravelAPI {
                             @Field("tName") String name,
                             @Field("RoomId") String roomID);
 
-    @DELETE("things/{id}")
-    Call<String> deleteThing(@Path("id") String thingID);
+    @DELETE("things/{Things}")
+    Call<String> deleteThing(@Path("Things") String thingName);
 }

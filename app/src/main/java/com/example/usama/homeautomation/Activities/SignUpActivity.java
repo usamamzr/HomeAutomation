@@ -1,6 +1,7 @@
 package com.example.usama.homeautomation.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -24,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText et_name, et_email, et_password, et_CPassword;
     Button btn_signUp;
-
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,16 @@ public class SignUpActivity extends AppCompatActivity {
                     signUp.enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
+                            User user = response.body();
                             Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_LONG).show();
+                            sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                            editor.putString("token", user.getApiToken());
+                            editor.putString("UserId",user.getId().toString());
+                            editor.apply();
+                            editor.commit();
+
                             Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(intent);
                             Log.i("responseSignUp", "onResponse(): " + "call: " + call + " response: " + response);

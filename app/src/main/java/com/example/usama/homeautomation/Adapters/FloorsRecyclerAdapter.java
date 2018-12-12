@@ -44,12 +44,13 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
 
     public void setFloorsList(ArrayList<Floor> arrayList) {
         this.listItems = arrayList;
-        this.context = context;
+
         notifyDataSetChanged();
     }
 
-    public FloorsRecyclerAdapter(ArrayList<Floor> arrayList) {
+    public FloorsRecyclerAdapter(ArrayList<Floor> arrayList, Context context) {
         this.listItems = arrayList;
+        this.context = context;
     }
 
 
@@ -104,6 +105,8 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
                                         public void onResponse(Call<Floor> call, Response<Floor> response) {
                                             Log.i("responseDeleteFloor", "onResponse(): " + "call: " + call + " response: " + response);
                                             Toast.makeText(view.getContext(), "Floor deleted", Toast.LENGTH_LONG).show();
+                                            listItems.remove(position);
+                                            notifyDataSetChanged();
                                         }
 
                                         @Override
@@ -111,8 +114,7 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
                                             Log.i("responseDeleteFloor", "onFailure(): " + "call: " + call + " t: " + t);
                                         }
                                     });
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(context, "Cannot Delete the Floor as it contains Rooms", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -122,8 +124,8 @@ public class FloorsRecyclerAdapter extends RecyclerView.Adapter<FloorsRecyclerAd
                                 Log.i("responseThingByRoom", "onFailure(): " + "call: " + call + " t: " + t);
                             }
                         });
-                        listItems.remove(position);
-                        notifyDataSetChanged();
+
+
                         dialog.dismiss();
                     }
                 });

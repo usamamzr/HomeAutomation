@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList arrayList = new ArrayList();
     Retrofit retrofit = RetrofitClient.getRetrofit();
     final LaravelAPI service = retrofit.create(LaravelAPI.class);
+    boolean doubleBackToExitPressedOnce = false;
 
+    SharedPreferences sharedPreferences;
+    private String token;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -52,21 +56,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         /*final ArrayList<Floor> arrayList = new ArrayList<>();
 
         for (int i = 1; i <= 5; i++) {
             arrayList.add(new Floor("Floor: " + i));
         }*/
+        sharedPreferences = getSharedPreferences("loginPrefs", context.MODE_PRIVATE);
+        token = sharedPreferences.getString("UserId", "");
 
         mRecyclerView = findViewById(R.id.floors_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new FloorsRecyclerAdapter(arrayList);
+        mAdapter = new FloorsRecyclerAdapter(arrayList, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
 
 
-        Call<ArrayList<Floor>> floorsList = service.getFloorsList();
+        Call<ArrayList<Floor>> floorsList = service.getByUser(token);
 
         floorsList.enqueue(new Callback<ArrayList<Floor>>() {
             @Override
@@ -87,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Call<ArrayList<Floor>> floorsList = service.getFloorsList();
+                Call<ArrayList<Floor>> floorsList = service.getByUser(token);
 
                 floorsList.enqueue(new Callback<ArrayList<Floor>>() {
                     @Override
@@ -130,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             builder.setView(editText);
             builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    Call<Floor> SetFloor = service.addFloors(editText.getText().toString());
+                    Call<Floor> SetFloor = service.addFloors(editText.getText().toString(), token);
                     SetFloor.enqueue(new Callback<Floor>() {
                         @Override
                         public void onResponse(Call<Floor> call, Response<Floor> response) {
@@ -182,18 +189,36 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void selectImg1(View view) {
-        String name = getResources().getResourceEntryName(R.drawable.icons8_1_48);
-        Toast.makeText(this, "" + name, Toast.LENGTH_SHORT).show();
-    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+//                super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Exiting...", Toast.LENGTH_SHORT).show();
 
-    public void selectImg2 (View view) {
-        String name = getResources().getResourceEntryName(R.drawable.icons8_2_48);
-        Toast.makeText(this, " " + name, Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                moveTaskToBack(true);
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 1000);
     }
-
-    public void selectImg3 (View view) {
-        String name = getResources().getResourceEntryName(R.drawable.icons8_3_48);
-        Toast.makeText(this, " " + name, Toast.LENGTH_SHORT).show();
-    }
+//
+//    public void selectImg1(View view) {
+//        String name = getResources().getResourceEntryName(R.drawable.icons8_1_48);
+//        Toast.makeText(this, "" + name, Toast.LENGTH_SHORT).show();
+//    }
+//
+//    public void selectImg2 (View view) {
+//        String name = getResources().getResourceEntryName(R.drawable.icons8_2_48);
+//        Toast.makeText(this, " " + name, Toast.LENGTH_SHORT).show();
+//    }
+//
+//    public void selectImg3 (View view) {
+//        String name = getResources().getResourceEntryName(R.drawable.icons8_3_48);
+//        Toast.makeText(this, " " + name, Toast.LENGTH_SHORT).show();
+//    }
 }

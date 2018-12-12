@@ -1,6 +1,7 @@
 package com.example.usama.homeautomation.Activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -35,6 +36,8 @@ public class RoomsActivity extends AppCompatActivity {
     private int FloorId;
     SwipeRefreshLayout swipeRefreshLayout;
 
+//    private Context context=getApplicationContext();
+
     Retrofit retrofit = RetrofitClient.getRetrofit();
     final LaravelAPI service = retrofit.create(LaravelAPI.class);
 
@@ -58,7 +61,7 @@ public class RoomsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new RoomsRecyclerAdapter(arrayList);
+        mAdapter = new RoomsRecyclerAdapter(arrayList,getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
 
 

@@ -3,6 +3,8 @@
     package="com.example.usama.homeautomation">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.SignUpActivity" />
-        <activity android:name=".Activities.FloorsActivity" />
+        <activity android:name=".Activities.CameraActivity" />
         <activity android:name=".Activities.RoomsActivity" />
         <activity android:name=".Activities.ThingsActivity"></activity>
     </application>

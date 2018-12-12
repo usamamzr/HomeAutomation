@@ -95,12 +95,15 @@ public class LoginActivity extends AppCompatActivity {
                             if (!(response.body() == null)) {
                                 if (userDetail != null) {
                                     String apiToken = userDetail.getApiToken();
+                                    sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("token", apiToken);
+                                    editor.putString("UserId",userDetail.getId().toString());
                                     editor.apply();
+                                    editor.commit();
                                 }
 
-                                sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 et_password.getText().clear();

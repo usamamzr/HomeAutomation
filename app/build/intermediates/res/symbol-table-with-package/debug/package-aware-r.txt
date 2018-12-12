@@ -675,18 +675,11 @@ drawable ic_add_black_24dp
 drawable ic_chevron_right_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_notifications_active_black_48dp
+drawable ic_notifications_black_24dp
 drawable ic_power_settings_new_black_48dp
-drawable icons8_1_48
-drawable icons8_2_48
-drawable icons8_3_48
-drawable icons8_circled_2_c_48
-drawable icons8_circled_3_c_48
-drawable icons8_door_opened_48
 drawable icons8_door_opened_96
-drawable icons8_german_house_48
 drawable icons8_german_house_96
-drawable icons8_level_1_48
-drawable icons8_network_drive_48
 drawable icons8_network_drive_96
 drawable noimgfound
 drawable notification_action_background
@@ -782,9 +775,6 @@ id icon
 id icon_group
 id ifRoom
 id image
-id img1
-id img2
-id img3
 id info
 id invisible
 id italic
@@ -799,6 +789,7 @@ id list_item
 id message
 id middle
 id multiply
+id nav_ip
 id navigation_add
 id navigation_logout
 id never
@@ -853,6 +844,7 @@ id submenuarrow
 id submit_area
 id swipeRefreshFloors
 id swipeRefreshRooms
+id swipeRefreshThings
 id switch1
 id switch2
 id tabMode
@@ -919,7 +911,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_floors
+layout activity_camera
 layout activity_login
 layout activity_main
 layout activity_rooms
@@ -942,6 +934,7 @@ layout single_room
 layout single_thing
 layout support_simple_spinner_dropdown_item
 menu add_menu
+menu camera_menu
 menu logout
 mipmap ic_launcher
 mipmap ic_launcher_round

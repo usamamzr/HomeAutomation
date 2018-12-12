@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\40c45f8682c039bfe71a2bf52a81d764\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\e4300dd6fae6f1bfa8cd811d690046ba\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\c5fc7ed547bd1473b0af22b33d339e22\AndroidManifest.xml:17:1-22:12
@@ -33,20 +33,20 @@ MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Hassaan\.gradle\c
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\db39b304808287150f7f2c9b91cf36aa\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\8bbb320803c161a390fe40bff9cede0f\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5065f8ff8e4499401c540680409098de\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
 	package
 		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:3:5-47
 		INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-30:12
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:2:11-69
@@ -54,8 +54,16 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:5:5-67
 	android:name
 		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:5:22-64
+uses-permission#android.permission.VIBRATE
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:6:22-63
+uses-permission#android.permission.ACCESS_NOTIFICATION_POLICY
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:7:5-85
+	android:name
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:7:22-82
 application
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:7:5-28:19
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:9:5-30:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\e4300dd6fae6f1bfa8cd811d690046ba\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\e4300dd6fae6f1bfa8cd811d690046ba\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\f1ebe4a395ed1e5e92b91a813ea8e253\AndroidManifest.xml:22:5-94
@@ -65,53 +73,53 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Hassaan\.g
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Hassaan\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\f1ebe4a395ed1e5e92b91a813ea8e253\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:14:9-35
 	android:label
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:10:9-41
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:12:9-41
 	android:roundIcon
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:11:9-54
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:13:9-54
 	android:icon
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:9:9-43
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:11:9-43
 	android:allowBackup
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:8:9-35
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:10:9-35
 	android:theme
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:13:9-40
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:15:9-40
 activity#com.example.usama.homeautomation.Activities.MainActivity
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:14:9-61
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:16:9-61
 	android:name
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:14:19-58
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:16:19-58
 activity#com.example.usama.homeautomation.Activities.LoginActivity
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:15:9-23:20
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:17:9-25:20
 	android:theme
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:17:13-56
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:19:13-56
 	android:name
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:16:13-53
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:18:13-53
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:18:13-22:29
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:20:13-24:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:21:17-69
 	android:name
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:21:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:21:17-77
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:23:17-77
 	android:name
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:21:27-74
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:23:27-74
 activity#com.example.usama.homeautomation.Activities.SignUpActivity
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:24:9-63
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:26:9-63
 	android:name
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:24:19-60
-activity#com.example.usama.homeautomation.Activities.FloorsActivity
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:25:9-63
-	android:name
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:25:19-60
-activity#com.example.usama.homeautomation.Activities.RoomsActivity
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:26:9-62
-	android:name
-		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:26:19-59
-activity#com.example.usama.homeautomation.Activities.ThingsActivity
-ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:27:9-72
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:26:19-60
+activity#com.example.usama.homeautomation.Activities.CameraActivity
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:27:9-63
 	android:name
 		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:27:19-60
+activity#com.example.usama.homeautomation.Activities.RoomsActivity
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:28:9-62
+	android:name
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:28:19-59
+activity#com.example.usama.homeautomation.Activities.ThingsActivity
+ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:29:9-72
+	android:name
+		ADDED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml:29:19-60
 uses-sdk
 INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Hassaan\AndroidStudioProjects\HomeAutomationGit\app\src\main\AndroidManifest.xml

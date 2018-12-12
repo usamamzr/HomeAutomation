@@ -41,8 +41,9 @@ public class RoomsRecyclerAdapter extends RecyclerView.Adapter<RoomsRecyclerAdap
         }
     }
 
-    public RoomsRecyclerAdapter(ArrayList<Room> arrayList) {
+    public RoomsRecyclerAdapter(ArrayList<Room> arrayList, Context context) {
         this.listItems = arrayList;
+        this.context = context;
     }
 
     public void setRoomList(ArrayList<Room> arrayList) {
@@ -101,6 +102,9 @@ public class RoomsRecyclerAdapter extends RecyclerView.Adapter<RoomsRecyclerAdap
                                         @Override
                                         public void onResponse(Call<Room> call, Response<Room> response) {
                                             Log.i("responseDeleteRoom", "onResponse(): " + "call: " + call + " response: " + response);
+
+                                            listItems.remove(position);
+                                            notifyDataSetChanged();
                                             Toast.makeText(view.getContext(), "Room deleted", Toast.LENGTH_LONG).show();
                                         }
 
@@ -109,9 +113,8 @@ public class RoomsRecyclerAdapter extends RecyclerView.Adapter<RoomsRecyclerAdap
                                             Log.i("responseDeleteRoom", "onFailure(): " + "call: " + call + " t: " + t);
                                         }
                                     });
-                                }
-                                else{
-                                    Toast.makeText(context, "Cannot Delete the Floor as it contains Things", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Cannot Delete the Room as it contains Things", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -120,8 +123,8 @@ public class RoomsRecyclerAdapter extends RecyclerView.Adapter<RoomsRecyclerAdap
                                 Log.i("responseThingByRoom", "onFailure(): " + "call: " + call + " t: " + t);
                             }
                         });
-                        listItems.remove(position);
-                        notifyDataSetChanged();
+
+
                         dialog.dismiss();
                     }
                 });

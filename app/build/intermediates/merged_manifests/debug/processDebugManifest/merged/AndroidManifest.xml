@@ -9,6 +9,8 @@
         android:targetSdkVersion="28" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
         android:allowBackup="true"
@@ -31,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.usama.homeautomation.Activities.SignUpActivity" />
-        <activity android:name="com.example.usama.homeautomation.Activities.FloorsActivity" />
+        <activity android:name="com.example.usama.homeautomation.Activities.CameraActivity" />
         <activity android:name="com.example.usama.homeautomation.Activities.RoomsActivity" />
         <activity android:name="com.example.usama.homeautomation.Activities.ThingsActivity" />
     </application>
