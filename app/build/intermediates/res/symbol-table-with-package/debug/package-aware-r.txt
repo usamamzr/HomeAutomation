@@ -742,6 +742,7 @@ id expand_activities_button
 id expanded_menu
 id floors_recyclerView
 id forever
+id forgot_password
 id gone
 id groups
 id home
@@ -887,6 +888,7 @@ layout activity_main
 layout activity_rooms
 layout activity_sign_up
 layout activity_things
+layout forgot_password_dialogue
 layout img_dialogue
 layout new_dialouge
 layout notification_action

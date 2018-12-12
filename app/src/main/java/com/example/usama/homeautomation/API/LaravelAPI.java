@@ -1,6 +1,7 @@
 package com.example.usama.homeautomation.API;
 
 import com.example.usama.homeautomation.Models.Floor;
+import com.example.usama.homeautomation.Models.PasswordReset.ResetPassword;
 import com.example.usama.homeautomation.Models.Room;
 import com.example.usama.homeautomation.Models.Thing;
 import com.example.usama.homeautomation.Models.User;
@@ -114,4 +115,17 @@ public interface LaravelAPI {
 
     @DELETE("things/{id}")
     Call<String> deleteThing(@Path("id") String thingID);
+
+    //////////////////////////////  THINGS /////////////////////////////////
+
+    @POST("password/email")
+    @FormUrlEncoded
+    Call<ResetPassword> requestPasswordReset(@Field("email") String email);
+
+    @POST("password/reset")
+    @FormUrlEncoded
+    Call<ResetPassword> passwordReset(@Field("email") String email,
+                              @Field("password") String password,
+                              @Field("password_confirmation") String passConfirm,
+                              @Field("token") String token);
 }
