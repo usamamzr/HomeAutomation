@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,8 +28,9 @@ import com.example.usama.homeautomation.Adapters.FloorsRecyclerAdapter;
 import com.example.usama.homeautomation.Models.Floor;
 import com.example.usama.homeautomation.Models.User;
 import com.example.usama.homeautomation.R;
-import com.example.usama.homeautomation.RetrofitClient;
+import com.example.usama.homeautomation.API.RetrofitClient;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -50,11 +52,15 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private String token;
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
 
         /*final ArrayList<Floor> arrayList = new ArrayList<>();
@@ -137,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             builder.setView(editText);
             builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+
                     Call<Floor> SetFloor = service.addFloors(editText.getText().toString(), token);
                     SetFloor.enqueue(new Callback<Floor>() {
                         @Override

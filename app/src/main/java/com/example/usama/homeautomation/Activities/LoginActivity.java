@@ -1,16 +1,13 @@
 package com.example.usama.homeautomation.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,11 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usama.homeautomation.API.LaravelAPI;
-import com.example.usama.homeautomation.Models.PasswordReset.ResetPassword;
 import com.example.usama.homeautomation.Models.User;
 import com.example.usama.homeautomation.R;
-import com.example.usama.homeautomation.RetrofitClient;
+import com.example.usama.homeautomation.API.RetrofitClient;
 import com.google.gson.Gson;
+
+import java.io.UnsupportedEncodingException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,9 +35,23 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false;
 
+    public static String getAuthToken(){
+        byte[] data = new byte[0];
+        try {
+            data = ("m.ahmed33@ucp.edu.pk:openhab123").getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }Log.i("TAG", "Basic " + Base64.encodeToString(data, Base64.NO_WRAP));
+        return "Basic " + Base64.encodeToString(data, Base64.NO_WRAP);
+
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
+
+
+
 
         sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
@@ -138,50 +150,50 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        forgot_password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.forgot_password_dialogue, null);
-                builder.setView(view);
-                final EditText editText = new EditText(LoginActivity.this);
-                editText.setInputType(InputType.TYPE_CLASS_TEXT);
-                builder.setMessage("Enter email here").setTitle("Reset password");
-                builder.setView(editText);
-                builder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String email = editText.getText().toString().trim();
-                        Retrofit retrofit = RetrofitClient.getRetrofit();
-                        final LaravelAPI service = retrofit.create(LaravelAPI.class);
-                        Call<ResetPassword> passReset = service.requestPasswordReset(email);
-
-                        passReset.enqueue(new Callback<ResetPassword>() {
-                            @Override
-                            public void onResponse(Call<ResetPassword> call, Response<ResetPassword> response) {
-                                Log.i("responseReset", "onResponse(): response: " + response);
-                                Toast.makeText(LoginActivity.this, "response: " + response, Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResetPassword> call, Throwable t) {
-                                Toast.makeText(LoginActivity.this, "t: " + t, Toast.LENGTH_SHORT).show();
-                                Log.i("responseReset", "onFailure(): t: " + t);
-                            }
-                        });
-                    }
-                });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
+//        forgot_password.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+//                view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.forgot_password_dialogue, null);
+//                builder.setView(view);
+//                final EditText editText = new EditText(LoginActivity.this);
+//                editText.setInputType(InputType.TYPE_CLASS_TEXT);
+//                builder.setMessage("Enter email here").setTitle("Reset password");
+//                builder.setView(editText);
+//                builder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        String email = editText.getText().toString().trim();
+//                        Retrofit retrofit = RetrofitClient.getRetrofit();
+//                        final LaravelAPI service = retrofit.create(LaravelAPI.class);
+//                        Call<ResetPassword> passReset = service.requestPasswordReset(email);
+//
+//                        passReset.enqueue(new Callback<ResetPassword>() {
+//                            @Override
+//                            public void onResponse(Call<ResetPassword> call, Response<ResetPassword> response) {
+//                                Log.i("responseReset", "onResponse(): response: " + response);
+//                                Toast.makeText(LoginActivity.this, "response: " + response, Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<ResetPassword> call, Throwable t) {
+//                                Toast.makeText(LoginActivity.this, "t: " + t, Toast.LENGTH_SHORT).show();
+//                                Log.i("responseReset", "onFailure(): t: " + t);
+//                            }
+//                        });
+//                    }
+//                });
+//
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                    }
+//                });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//            }
+//        });
     }
 
     @Override

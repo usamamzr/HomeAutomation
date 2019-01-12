@@ -16,7 +16,7 @@ import com.example.usama.homeautomation.API.LaravelAPI;
 import com.example.usama.homeautomation.Activities.ThingsActivity;
 import com.example.usama.homeautomation.Models.Room;
 import com.example.usama.homeautomation.R;
-import com.example.usama.homeautomation.RetrofitClient;
+import com.example.usama.homeautomation.API.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;

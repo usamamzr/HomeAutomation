@@ -96,6 +96,10 @@
         "source": "C:\\Users\\Hassaan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\40c45f8682c039bfe71a2bf52a81d764\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\build\\intermediates\\res\\merged\\debug\\layout_forgot_password_dialogue.xml.flat",
+        "source": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\src\\main\\res\\layout\\forgot_password_dialogue.xml"
+    },
+    {
         "merged": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\build\\intermediates\\res\\merged\\debug\\color-v23_abc_tint_switch_track.xml.flat",
         "source": "C:\\Users\\Hassaan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\40c45f8682c039bfe71a2bf52a81d764\\res\\color-v23\\abc_tint_switch_track.xml"
     },
@@ -1150,6 +1154,10 @@
     {
         "merged": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
         "source": "C:\\Users\\Hassaan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\40c45f8682c039bfe71a2bf52a81d764\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\build\\intermediates\\res\\merged\\debug\\layout_video_view.xml.flat",
+        "source": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\src\\main\\res\\layout\\video_view.xml"
     },
     {
         "merged": "C:\\Users\\Hassaan\\AndroidStudioProjects\\HomeAutomationGit\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_notifications_black_24dp.xml.flat",

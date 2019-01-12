@@ -7,17 +7,18 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.usama.homeautomation.API.LaravelAPI;
 import com.example.usama.homeautomation.API.OpenhabAPI;
+import com.example.usama.homeautomation.API.RetrofitClient;
 import com.example.usama.homeautomation.Adapters.ItemRecyclerAdapter;
-import com.example.usama.homeautomation.Adapters.RoomsRecyclerAdapter;
-import com.example.usama.homeautomation.Models.Room;
 import com.example.usama.homeautomation.Models.TblItem;
 import com.example.usama.homeautomation.Models.Thing;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,17 @@ public class MyDialogFragment extends DialogFragment {
 
     Retrofit retrofit = RetrofitClient.getRetrofit();
     LaravelAPI service = retrofit.create(LaravelAPI.class);
+
+    public static String getAuthToken(){
+        byte[] data = new byte[0];
+        try {
+            data = ("m.ahmed33@ucp.edu.pk:openhab123").getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return "Basic " + Base64.encodeToString(data, Base64.NO_WRAP);
+    }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -63,7 +75,7 @@ public class MyDialogFragment extends DialogFragment {
                 Log.i("getitemlist", "onResponse: " + getitemlist.size());
 
                 OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
-                Call<List<TblItem>> ItemList = service2.getItemList();
+                Call<List<TblItem>> ItemList = service2.getItemList(getAuthToken());
                 ItemList.enqueue(new Callback<List<TblItem>>() {
                     @Override
                     public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {

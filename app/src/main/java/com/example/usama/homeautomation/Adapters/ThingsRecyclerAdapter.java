@@ -1,17 +1,11 @@
 package com.example.usama.homeautomation.Adapters;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,7 +22,7 @@ import com.example.usama.homeautomation.API.OpenhabAPI;
 import com.example.usama.homeautomation.Activities.CameraActivity;
 import com.example.usama.homeautomation.Models.TblItem;
 import com.example.usama.homeautomation.R;
-import com.example.usama.homeautomation.RetrofitClient;
+import com.example.usama.homeautomation.API.RetrofitClient;
 
 import java.util.List;
 
@@ -36,8 +30,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class ThingsRecyclerAdapter extends RecyclerView.Adapter<ThingsRecyclerAdapter.MyViewHolder> {
     private List<TblItem> listItems;

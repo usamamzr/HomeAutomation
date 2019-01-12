@@ -787,6 +787,7 @@ id linlay0
 id linlay1
 id listMode
 id list_item
+id main
 id message
 id middle
 id multiply
@@ -843,6 +844,7 @@ id standard
 id start
 id submenuarrow
 id submit_area
+id surfaceView
 id swipeRefreshFloors
 id swipeRefreshRooms
 id swipeRefreshThings
@@ -875,7 +877,6 @@ id tv_value
 id uniform
 id up
 id useLogo
-id videoView
 id withText
 id wrap
 id wrap_content
@@ -935,6 +936,7 @@ layout single_item
 layout single_room
 layout single_thing
 layout support_simple_spinner_dropdown_item
+layout video_view
 menu add_menu
 menu camera_menu
 menu logout

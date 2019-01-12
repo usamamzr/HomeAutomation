@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.usama.homeautomation.API.LaravelAPI;
 import com.example.usama.homeautomation.Models.User;
 import com.example.usama.homeautomation.R;
-import com.example.usama.homeautomation.RetrofitClient;
+import com.example.usama.homeautomation.API.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,7 +1,6 @@
 package com.example.usama.homeautomation.Activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,7 +19,7 @@ import com.example.usama.homeautomation.API.LaravelAPI;
 import com.example.usama.homeautomation.Adapters.RoomsRecyclerAdapter;
 import com.example.usama.homeautomation.Models.Room;
 import com.example.usama.homeautomation.R;
-import com.example.usama.homeautomation.RetrofitClient;
+import com.example.usama.homeautomation.API.RetrofitClient;
 
 import java.util.ArrayList;
 
@@ -66,7 +65,6 @@ public class RoomsActivity extends AppCompatActivity {
 
 
         Call<ArrayList<Room>> roomsList = service.getRoomByFloor(String.valueOf(FloorId));
-
         roomsList.enqueue(new Callback<ArrayList<Room>>() {
             @Override
             public void onResponse(Call<ArrayList<Room>> call, Response<ArrayList<Room>> response) {

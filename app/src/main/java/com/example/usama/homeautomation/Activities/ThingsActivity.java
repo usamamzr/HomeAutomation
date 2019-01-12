@@ -1,14 +1,11 @@
 package com.example.usama.homeautomation.Activities;
 
-import android.content.DialogInterface;
-import android.graphics.Path;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,8 +17,9 @@ import com.example.usama.homeautomation.Models.TblItem;
 import com.example.usama.homeautomation.Models.Thing;
 import com.example.usama.homeautomation.MyDialogFragment;
 import com.example.usama.homeautomation.R;
-import com.example.usama.homeautomation.RetrofitClient;
+import com.example.usama.homeautomation.API.RetrofitClient;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -42,6 +40,18 @@ public class ThingsActivity extends AppCompatActivity {
 private Timer timer = new Timer();
     private int RoomId;
     private List<TblItem> itemList = new ArrayList<>();
+
+
+    public static String getAuthToken(){
+        byte[] data = new byte[0];
+        try {
+            data = ("m.ahmed33@ucp.edu.pk:openhab123").getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return "Basic " + Base64.encodeToString(data, Base64.NO_WRAP);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +91,7 @@ private Timer timer = new Timer();
                         Log.i("responsethings", "onResponse: size: " + things.size());
 
                         OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
-                        Call<List<TblItem>> ItemList = service2.getItemList();
+                        Call<List<TblItem>> ItemList = service2.getItemList(getAuthToken());
                         ItemList.enqueue(new Callback<List<TblItem>>() {
                             @Override
                             public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {
@@ -145,7 +155,7 @@ private Timer timer = new Timer();
                         Log.i("responsethings", "onResponse: size: " + things.size());
 
                         OpenhabAPI service2 = OpenhabAPI.retrofit.create(OpenhabAPI.class);
-                        Call<List<TblItem>> ItemList = service2.getItemList();
+                        Call<List<TblItem>> ItemList = service2.getItemList(getAuthToken());
                         ItemList.enqueue(new Callback<List<TblItem>>() {
                             @Override
                             public void onResponse(Call<List<TblItem>> call, Response<List<TblItem>> response) {

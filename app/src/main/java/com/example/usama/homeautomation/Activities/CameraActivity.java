@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,15 +26,10 @@ import java.util.TimerTask;
 
 public class CameraActivity extends AppCompatActivity implements View.OnClickListener {
 
-    VideoView videoView;
-    Button btnPlayPause;
-    private String videoURL ;
-private Timer myTimer;
 
     SharedPreferences sharedPreferences;
-//    String videoURL = "http://192.168.0.183/video.cgi";
+    String videoURL = "http://192.168.0.183/video.cgi";
 
-    private MediaPlayer mediaPlayer;
 
 
     @Override
@@ -44,47 +40,14 @@ private Timer myTimer;
         sharedPreferences = getSharedPreferences("CameraIP", MODE_PRIVATE);
         videoURL = sharedPreferences.getString("IP", "192.168.10.18");
 
-        videoView = findViewById(R.id.videoView);
-//        btnPlayPause = findViewById(R.id.btnPlayPause);
-//        btnPlayPause.setOnClickListener(CameraActivity.this);
+        Fragment fragment = new VideoViewFragment();
+//
+        Bundle data = new Bundle();//Use bundle to pass data
+        data.putString("IP", videoURL);//put string, int, etc in bundle with a key value
+        fragment.setArguments(data);
 
-        myTimer= new Timer();
-        myTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // If you want to modify a view in your Activity
-                CameraActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            if (!videoView.isPlaying()) {
-                                Uri uri = Uri.parse("http://"+videoURL+"/image/jpeg.cgi");
-                                videoView.setVideoURI(uri);
-                                videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                    @Override
-                                    public void onCompletion(MediaPlayer mediaPlayer) {
-//                                        btnPlayPause.setText("Play");
-                                    }
-                                });
-                            } else {
-                                videoView.pause();
-                            }
-                        } catch (Exception ex) {
-
-                        }
-                        videoView.requestFocus();
-                        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                            @Override
-                            public void onPrepared(MediaPlayer mediaPlayer) {
-                                mediaPlayer.setLooping(true);
-                                videoView.start();
-                            }
-                        });
-                    }
-
-                });
-            }
-        }, 100, 250); // initial delay 1 milisecond, interval 1 secon
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main, fragment).commit();
     }
 
     @Override
@@ -104,7 +67,7 @@ private Timer myTimer;
         int id = item.getItemId();
 
         if (id == R.id.nav_ip) {
-            myTimer.cancel();
+
             AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
             View view = LayoutInflater.from(CameraActivity.this).inflate(R.layout.new_dialouge, null);
             builder.setView(view);
@@ -143,8 +106,7 @@ private Timer myTimer;
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-        myTimer.cancel();
+
         finish();
     }
 }
